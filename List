@@ -1,0 +1,41 @@
+class ListNode<T> {
+  val: T;
+  next: ListNode<T>;
+  
+  constructor(val: T = null, next: ListNode<T> = null) {
+    this.val = val;
+    this.next = next;
+  }
+}
+
+class List<T> {
+   head: ListNode<T>;
+   
+   constructor() {
+      this.head = new ListNode<T>();
+   }
+}
+
+class DoubleLinkedListNode<T> {
+  val: T;
+  next: DoubleLinkedListNode<T>;
+  prev: DoubleLinkedListNode<T>;
+  
+  constructor(val: T = null, next: DoubleLinkedListNode<T> = null, prev: DoubleLinkedListNode<T> = null) {
+    this.val = val;
+    this.next = next;
+  }
+}
+
+class DoubleLinkedList<T> {
+   head: DoubleLinkedListNode<T>;
+   tail: DoubleLinkedListNode<T>;
+   
+   constructor() {
+      this.head = new DoubleLinkedListNode<T>();
+      this.tail = new DoubleLinkedListNode<T>();
+      
+      this.head.next = this.tail;
+      this.tail.prev = this.head;
+   }
+}
