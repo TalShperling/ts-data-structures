@@ -1,0 +1,70 @@
+class Trie {
+    char: string;
+    children: Trie[];
+    isWord: boolean;
+
+    constructor(char: string | null) {
+        this.char = char;
+        this.isWord = false;
+        this.children = [];
+    }
+
+    addWord(word: string, node: Trie = this): void {
+        let isInserted = false;
+        
+        for(let child of node.children) {
+            if(child.char === word.charAt(0)) {
+                isInserted = true;
+                if(word.length === 1) {
+                    child.isWord = true;
+                } else {
+                    this.addWord(word.substring(1, word.length), child);
+                }
+            }
+        }
+
+        if(!isInserted) {
+            let newTrie = new Trie(word.charAt(0));
+            if(word.length === 1) {
+                newTrie.isWord = true;
+            } else {
+                newTrie.addWord(word.substring(1, word.length));
+            }
+            node.children.push(newTrie);
+        }
+    }
+    
+    isWordInTrie(word: string, trie: Trie = this): boolean {        
+        for(let child of trie.children) {
+            let currTrie = child;
+            for(let i = 0; i < word.length; i++) {
+                if(i === word.length - 1 && word.charAt(i) === currTrie.char && currTrie.isWord) {        
+                    return true;
+                } else if(word.charAt(i) === currTrie.char){
+                    return this.isWordInTrie(word.substring(1, word.length), currTrie);
+                } else {
+                    break;
+                }
+            }
+        }
+        
+        return false;
+    }
+
+    isPartOfWordInTrie(word: string, trie: Trie = this): boolean {        
+        for(let child of trie.children) {
+            let currTrie = child;
+            for(let i = 0; i < word.length; i++) {
+                if(i === word.length - 1 && word.charAt(i) === currTrie.char) {        
+                    return true;
+                } else if(word.charAt(i) === currTrie.char){
+                    return this.isPartOfWordInTrie(word.substring(1, word.length), currTrie);
+                } else {
+                    break;
+                }
+            }
+        }
+        
+        return false;
+    }
+}
