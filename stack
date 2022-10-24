@@ -1,0 +1,21 @@
+class MyStack<T> {
+    private items: T[] = [];
+
+    constructor(private capacity: number = Infinity){}
+
+    push(item:T):void {
+        if(this.items.length >= this.capacity) {
+            throw Error("Stack Overflow");
+        }
+        
+        this.items.push(item);
+    }
+    
+    pop(): T {
+        return this.items.pop();
+    }
+
+    getItems(): T[] {
+        return this.items.reverse();
+    }
+}
