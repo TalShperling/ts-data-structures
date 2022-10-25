@@ -19,6 +19,17 @@ class UnionFind {
     return num;
   }
   
+  // O(aN) ~= O(1)
+  optimizedFind(num: number): number {
+    if(root[num] === num) {
+      return num;
+    }
+
+    root[num] = find(root[num]);
+    
+    return root[num];
+  }
+  
   // O(logN)
   union(first: number, second: number): void {
     let rootFirst = this.find(first);
