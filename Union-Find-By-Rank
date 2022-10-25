@@ -1,0 +1,39 @@
+class UnionFind {
+  private rank: number[];
+  private root: number[];
+  
+  constructor(size: number) {
+    this.rank = new Array(size).fill(1);
+    for(let i = 0; i < size; i++) {
+      this.root[i] = i;  
+    }
+  }
+  
+  find(num: number): number {
+    while(this.root[num] !== num) {
+      num = this.root[num];
+    }
+    
+    return num;
+  }
+  
+  union(first: number, second: number): void {
+    let rootFirst = this.find(first);
+    let rootSecond = this.find(second);
+    
+    if(rootFirst !== rootSecond) {
+      if(rank[rootFirst] > rank[rootSecond]) {
+        root[rootSecond] = rootFirst;
+      } else if(rank[rootSecond] > rank[rootFirst]) {
+        root[rootFirst] = rootSecond;
+      } else {
+        root[rootSecond] = rootFirst;
+        rank[rootFirst] += 1;
+      }
+    }
+  }
+  
+  isConnected(first: number, second:number): boolean {
+    return this.find(first) === this.find(second);
+  }
+}
